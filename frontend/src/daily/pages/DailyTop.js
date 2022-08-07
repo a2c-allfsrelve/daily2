@@ -1,0 +1,45 @@
+import React, { useState, useEffect } from 'react'
+import { getDaily } from '../api/getDaily'
+import { DailyContent } from '../components/DailyContent'
+import { CategoryList } from '../components/CategoryList'
+
+
+export const DailyTop = () => {
+    const initialState = {
+        id: '',
+        date: '',
+        evaluation: '',
+    }
+
+    const [daily, setDaily] = useState(initialState);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        getDaily()
+            .then(d => {
+                setDaily(d)
+                setLoading(false)
+            })
+            .catch(e => {
+                throw new Error(e)
+            })
+    }, [])
+
+    return (
+        <div>
+            <CategoryList />
+            <div className='contents_container'>
+                {
+                    loading ?
+                        <h1>loading...</h1>
+                        :
+                        <li>
+                            {daily.map(d => <DailyContent {...d} />)}
+                        </li>
+                }
+                
+            </div>
+        </div>
+    )
+
+}
