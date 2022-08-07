@@ -25,7 +25,15 @@ class Evaluation(models.Model):
         return self.evaluation
 
 class Contact(models.Model):
-    contact = MarkdownxField() #追加・お問い合わせ用
+    name = models.CharField(max_length=255, null=True) #追加・お問い合わせ用
+
+    address = models.EmailField(max_length=255, null=True)
+
+    twitter = models.CharField(max_length=16, null=True)
+
+    oshi = models.CharField(max_length=255, null=True)
+
+    contact = models.CharField(max_length=1023, null=True)
 
     def __str__(self):
         return self.contact

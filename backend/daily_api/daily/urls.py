@@ -7,5 +7,5 @@ urlpatterns = [
     path('regist/', views.RegistDaily.as_view()),  # 日記投稿
     path('<int:pk>/', views.DailyDetail.as_view()),  # 一日の詳細
     path('category/<str:cat>/', views.Category.as_view()),  # カテゴリ別一覧
-    # path('contact/',views.Contact.as_view()),
+    path('contact/',views.ContactView.as_view()),
     ]

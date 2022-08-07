@@ -14,6 +14,7 @@ from rest_framework import serializers
 from rest_framework.parsers import JSONParser
 
 from .models import Daily
+from .models import Contact
 from daily.system_settings import messages
 
 
@@ -134,3 +135,26 @@ class DailySerializer(serializers.ModelSerializer):
         model = Daily
         fields = ('date', 'univ', 'study', 'other', 'first_meet',
                   'wanna_do', 'summary', 'evaluation', 'evaluation', 'isOpen')
+
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = ('name', 'address', 'twitter', 'oshi', 'contact')
+
+class ContactView(APIView):
+    def get(self, request):
+        return Response(data={
+            'data': "あいうえお"
+        })
+    def post(self, request, *args, **kwargs):
+        try:
+            serializer = ContactSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+
+            response = "成功"
+            return Response(data=response, status=status.HTTP_200_OK)
+
+        except Exception as ex:
+            return Response(data=ex.as_json, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
