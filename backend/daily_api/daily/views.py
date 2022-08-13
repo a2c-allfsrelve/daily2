@@ -1,21 +1,12 @@
 # JSONを返す処理
-
-from asyncio.windows_events import NULL
-from dataclasses import field
-from functools import partial
-from pyexpat import model
-from re import T
-from urllib import response
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import status, viewsets, filters
+from rest_framework import status
 from rest_framework import serializers
-from rest_framework.parsers import JSONParser
 
 from .models import Daily
 from .models import Contact
-from daily.system_settings import messages
 
 
 class ListDaily(APIView):
@@ -136,16 +127,20 @@ class DailySerializer(serializers.ModelSerializer):
         fields = ('date', 'univ', 'study', 'other', 'first_meet',
                   'wanna_do', 'summary', 'evaluation', 'evaluation', 'isOpen')
 
+
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
         fields = ('name', 'address', 'twitter', 'oshi', 'contact')
 
+
+# コンタクト
 class ContactView(APIView):
     def get(self, request):
         return Response(data={
             'data': "あいうえお"
         })
+
     def post(self, request, *args, **kwargs):
         try:
             serializer = ContactSerializer(data=request.data)
@@ -157,4 +152,3 @@ class ContactView(APIView):
 
         except Exception as ex:
             return Response(data=ex.as_json, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
