@@ -1,63 +1,33 @@
 import React from 'react';
-import axios from 'axios';
 
-
-
-class Contact extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            name:"",
-            address:"",
-            twitter:"",
-            oshi:"",
-            contact:"",
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    handleSubmit(){
-        axios({
-            method:'POST',
-            url:'http://localhost:3000/contact/submit/',
-            data:{name:this.state.name, address:this.state.address, twitter:this.state.twitter, oshi:this.state.oshi, contact:this.state.contact},
-        }).then(response=>console.log(response.state));
-    }
-    handleChange(e){
-        this.setState({
-            value: e.target.value
-        });
-    }
-    render(){
+export const Contact = () => {
     return(
         <div className="controls">
-            {/* <form> */}
+            <form>
             <label className="contact_label" htmlFor="name">
                 <p>お名前（必須）</p>
-                <input type="text" name="name" id="name" value={this.state.name} onChange={this.handleChange}/>
+                <input type="text" name="name" id="name"/>
             </label>
-            <label className="contact_label" htmlFor="address">
+            <label className="contact_label" htmlFor="mail">
                 <p>メールアドレス（必須）</p>
-                <input type="text" name="address" id="address" value={this.state.address} onChange={this.handleChange}/>
+                <input type="text" name="mail" id="mail" />
             </label>
             <label className="contact_label" htmlFor="twitter" >
                 <p>Twitterアカウント</p>
-                <input type="text" name="twitter" id="teitter" value={this.state.twitter} onChange={this.handleChange}/>
+                <input type="text" name="twitter" id="teitter" />
             </label>
             <label className="contact_label" htmlFor="oshi">
                 <p>推し</p>
-                <input type="text" name="oshi" id="oshi" value={this.state.oshi} onChange={this.handleChange}/>
+                <input type="text" name="oshi" id="oshi" />
             </label>
             <label className="contact_label" htmlFor="otoiawase">
                 <p>お問い合わせ内容（必須）</p>
-                <textarea name="contact" id="otoiawase" value={this.state.contact} onChange={this.handleChange}></textarea>
+                <textarea value="" name="otoiawase" id="otoiawase" ></textarea>
             </label>
             <div className='sbm_button'>
-                <button onClick={()=>this.handleSubmit()}>送信</button>
+                <input type="submit" value="Submit" />
             </div>
-            {/* </form> */}
+            </form>
         </div>
-    )}
+    )
   }
-
-  export default Contact
