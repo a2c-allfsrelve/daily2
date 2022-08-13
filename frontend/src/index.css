@@ -87,7 +87,7 @@ code {
   line-height:60px;
   margin:10px;
 }
-.sbm_button input{
+.sbm_button button{
   display:block;
   width:100%;
   height:100%;
@@ -103,7 +103,7 @@ code {
   -moz-border-radius:35px;
   transition: all 0.5s ease;
 }
-.sbm_button input:hover{
+.sbm_button button:hover{
   background:#FFFFFF;
   color:#FAB693;
   box-shadow:none;
